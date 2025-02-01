@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Chooser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer>
+        let votes = { photo1: 0, photo2: 0 };
+
+        function vote(photo) {
+            votes[photo]++;
+            updateResults();
+        }
+
+        function updateResults() {
+            const totalVotes = votes.photo1 + votes.photo2;
+            const percentage1 = totalVotes ? ((votes.photo1 / totalVotes) * 100).toFixed(2) : 0;
+            const percentage2 = totalVotes ? ((votes.photo2 / totalVotes) * 100).toFixed(2) : 0;
+
+            document.getElementById('result1').textContent = `${percentage1}%`;
+            document.getElementById('result2').textContent = `${percentage2}%`;
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Photo Chooser</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-8">Choose Your Favorite Photo</h2>
+            <div class="flex justify-center gap-8">
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <img id="photo1" src="https://via.placeholder.com/300" class="w-64 h-64 rounded-lg" alt="Photo 1">
+                    <button onclick="vote('photo1')" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Vote</button>
+                    <p id="result1" class="mt-2 text-lg font-bold">0%</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <img id="photo2" src="https://via.placeholder.com/300" class="w-64 h-64 rounded-lg" alt="Photo 2">
+                    <button onclick="vote('photo2')" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Vote</button>
+                    <p id="result2" class="mt-2 text-lg font-bold">0%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 text-white text-center py-4">
+        <p>&copy; 2025 Photo Chooser. All rights reserved.</p>
+    </footer>
+</body>
+</html>
